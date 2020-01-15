@@ -28,14 +28,14 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-arm64
 RUN useradd -m -d /home/hive -s /bin/bash hive && echo hive:hive | chpasswd && adduser hive sudo
 RUN echo "hive ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-USER hive
-WORKDIR /home/hive
-
 # Build Hadoop Before play with Hive
 RUN curl -sL https://github.com/liusheng/package/releases/download/protobuf-aarch64/protobuf-3.7.1.tar.gz | tar zx -C /opt/
 RUN echo "/opt/protobuf-3.7.1/lib/" > /etc/ld.so.conf.d/protobuf-3.7.1.conf && ldconfig
 ENV PROTOBUF_HOME /opt/protobuf-3.7.1
 ENV PATH "${PATH}:/opt/protobuf-3.7.1/bin"
+
+USER hive
+WORKDIR /home/hive
 
 RUN curl -sL https://github.com/liusheng/package/files/3904116/wildfly-openssl-1.0.7.Final.jar.tar.gz | tar zx \
     && mvn install:install-file -DgroupId=org.wildfly.openssl -Dfile=wildfly-openssl-1.0.7.Final.jar -DartifactId=wildfly-openssl -Dversion=1.0.7.Final -Dpackaging=jar \
@@ -51,10 +51,15 @@ RUN git clone https://github.com/apache/hadoop \
     && export PATH=${PATH}:$(realpath ~/hadoop/hadoop-dist/target/hadoop-*-SNAPSHOT/bin)
 
 # Play with Hive
+
+USER root
+
 RUN curl -sL https://github.com/liusheng/package/releases/download/protobuf-aarch64/protobuf-2.5.0.tar.gz | tar zx -C /opt/
 RUN echo /opt/protobuf-2.5.0/lib/ > /etc/ld.so.conf.d/protobuf-2.5.0.conf && ldconfig
 ENV PROTOBUF_HOME /opt/protobuf-2.5.0
 ENV PATH "${PATH}:/opt/protobuf-2.5.0/bin"
+
+USER hive
 
 RUN mvn install:install-file -DgroupId=com.google.protobuf -DartifactId=protoc -Dversion=2.5.0 -Dclassifier=linux-aarch_64 -Dpackaging=exe -Dfile=/opt/protobuf-2.5.0/bin/protoc
 
