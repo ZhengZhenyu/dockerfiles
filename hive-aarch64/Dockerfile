@@ -47,8 +47,7 @@ RUN curl -sL https://github.com/liusheng/package/releases/download/netty-all/net
     
 RUN git clone https://github.com/apache/hadoop \
     && cd hadoop \
-    && mvn clean install -e -B -Pdist,native -Dtar -DskipTests -Dmaven.javadoc.skip 2>&1 | sudo tee ~/hadoop-results/hadoop_build.log \
-    && export PATH=${PATH}:$(realpath ~/hadoop/hadoop-dist/target/hadoop-*-SNAPSHOT/bin)
+    && mvn clean install -e -B -Pdist,native -Dtar -DskipTests -Dmaven.javadoc.skip 2>&1
 
 # Play with Hive
 
