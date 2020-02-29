@@ -26,6 +26,8 @@ RUN apt-get -q update \
         libdevmapper-dev \
         libpciaccess-dev \
         uuid-dev \
-        ca-certificates
+        ca-certificates \
+        xsltproc \
+        libxml2-utils
 
 WORKDIR /opt
