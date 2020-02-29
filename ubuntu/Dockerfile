@@ -19,9 +19,12 @@ RUN apt-get -q update \
         curl \
         sudo \
         git \
+        libgnutls28-dev \
+        libnl-3-dev \
+        libnl-route-3-dev \
+        libxml2-dev \
+        libdevmapper-dev \
+        libpciaccess-dev \
+        uuid-dev
 
-RUN useradd -m -d /home/kevin -s /bin/bash kevin && echo kevin:kevin | chpasswd && adduser kevin sudo
-RUN echo "kevin ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-
-USER kevin
-WORKDIR /home/kevin
+WORKDIR /opt
