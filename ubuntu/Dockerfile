@@ -25,6 +25,7 @@ RUN apt-get -q update \
         libxml2-dev \
         libdevmapper-dev \
         libpciaccess-dev \
-        uuid-dev
+        uuid-dev \
+        ca-certificates
 
 WORKDIR /opt
