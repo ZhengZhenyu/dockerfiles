@@ -29,6 +29,9 @@ RUN apt-get -q update \
         ca-certificates \
         xsltproc \
         libxml2-utils \
-        gettext
+        gettext \
+        ebtables \
+        dnsmasq \
+        iptables
 
 WORKDIR /opt
