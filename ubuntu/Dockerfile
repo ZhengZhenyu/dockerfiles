@@ -28,6 +28,7 @@ RUN apt-get -q update \
         uuid-dev \
         ca-certificates \
         xsltproc \
-        libxml2-utils
+        libxml2-utils \
+        gettext
 
 WORKDIR /opt
