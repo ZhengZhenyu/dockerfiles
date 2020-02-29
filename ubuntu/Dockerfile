@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:19.10
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
